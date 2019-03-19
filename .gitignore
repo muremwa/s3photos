@@ -1,0 +1,13 @@
+# Specific files
+s3photos/static/js/bootstrap.min.js
+s3photos/static/js/jquery.js
+s3photos/static/css/bootstrap.min.css
+
+# file extensions
+*.sqlite3
+*.pyc
+
+# folders
+.idea/*
+.vscode/*
+media/*

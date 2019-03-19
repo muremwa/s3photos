@@ -1,0 +1,50 @@
+{% extends "photos/base.html" %}
+{% load staticfiles %}
+
+{% block title %}all posts{% endblock title %}
+{% block style %}<link rel="stylesheet" type="text/css" media="screen" href="{% static 'photos/css/post_list.css' %}" />{% endblock style %}
+{% block home %}active{% endblock home %}
+
+{% block content %}
+    <div class="every">
+
+        {% for post in posts %}
+        <div class="post card post-{{post.pk}}">
+            <img src="{{post.image_file.url}}" alt="" class="post-img">
+            <div class="post-info">
+                <!-- user and time info -->
+                <div class="info-post">
+                    <div class="uploader">
+                        <span class="uploader-info">
+                            <img class="user-vector vector" src="{% static 'svg/user.svg' %}" alt="user-vector">
+                            <a href="/" class="uploader-name">{{post.uploaded_by}}</a>
+                        </span>
+                    </div>
+                    <div class="date">
+                        <img src="{% static 'svg/clock.svg' %}" alt="clock-vector" class="clock-vector vector">
+                        <span class="posted-time">{{ post.time }}</span>
+                    </div>
+                </div>
+
+                <!-- Caption -->
+                <div class="caption">
+                    <p>{{ post.caption }}</p>
+                </div>
+
+                <!-- like button -->
+                <div class="like">
+                    {% csrf_token %}
+                    <img src="{% if post.pk in liked %}{% static 'svg/heart_full.svg' %}{% else %}{% static 'svg/heart.svg' %}{% endif %}" alt="like vector" class="vector liking" data-like-url="{{post.liking_url}}">
+                    <span class="h-m-l" name='count'>{{post.likes}}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+
+{% endblock content %}
+
+{% block script %} <script src="{% static 'photos/js/post.js' %}"></script> {% endblock script %}

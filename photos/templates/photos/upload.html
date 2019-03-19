@@ -1,0 +1,70 @@
+{% extends "photos/base.html" %}
+{% load staticfiles %}
+
+{% block title %}upload{% endblock title %}
+
+{% block style %}<link rel="stylesheet" href="{% static 'photos/css/upload.css' %}" rel="stylesheet">{% endblock style %}
+
+{% block your %}active{% endblock your %}
+
+{% block content %}
+
+<div class="cloud">
+    
+    <form id="form-upload" action="" method="POST" role="form" enctype="multipart/form-data">
+        <legend class="text-center legend-form">Upload an image to <span class="s3">S3photos</span></legend>
+        {% csrf_token %}
+
+        {% if form.errors %}
+            
+            <div class="alert alert-warning text-center error">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Please correct the errors below
+            </div>
+            
+        {% endif %}
+
+        <div class="img-to-up">
+            <h6 class="text-center">You are about to upload the image below</h6>
+            <img id="image-to-call" src="" alt="image to be uploaded">
+        </div>
+
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}                
+                <div class="alert alert-warning {{field.label}}-alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ error }}
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-info {{field.label}}-alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{field.help_text}}
+                </div>                
+            {% endif %}
+
+            <div class="form-group">
+                <label for="">{{field.label}}</label>
+                {{field}}
+            </div>
+            <hr>
+        {% endfor %}
+    
+        
+    
+        <button type="submit" class="btn btn-dark upload-btn">Upload to <span class="s3">S3photos</span></button>
+    </form>
+    <script type="text/javascript">
+        var inputs = document.getElementsByTagName('input');
+        text = document.getElementsByTagName('textarea')[0].classList.add("form-control")
+        inputs.your_name.classList.add("form-control")
+        inputs.file.classList.add("form-control")
+        inputs.file.style.height = "100%";
+    </script>
+    
+</div>
+
+{% endblock content %}
+
+{% block script %}<script src="{% static 'photos/js/upload.js' %}"></script>{% endblock script %}
