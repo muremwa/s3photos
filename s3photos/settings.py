@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-^ht-%&z0+u4+tbl9@d4n17t*)g9ft1d4k)xb($%^2-z@u$5$v'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -73,9 +73,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 's3photos.wsgi.application'
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dklwdbtii',
-    'API_KEY': '695757882446143',
-    'API_SECRET': 'qe29sZO72ZEMz92E7uZUoRU5R_w',
+    'CLOUD_NAME': '',
+    'API_KEY': '',
+    'API_SECRET': '',
     'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, 'static')
 }
 
