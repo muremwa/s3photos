@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'photos.apps.PhotosConfig',
 ]
 
@@ -69,6 +71,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 's3photos.wsgi.application'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dklwdbtii',
+    'API_KEY': '695757882446143',
+    'API_SECRET': 'qe29sZO72ZEMz92E7uZUoRU5R_w',
+    'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, 'static')
+}
 
 
 # Database
@@ -125,4 +134,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
