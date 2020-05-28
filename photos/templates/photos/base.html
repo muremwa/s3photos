@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>S3photos | {% block title %}{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% comment %} <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css' %}" /> {% endcomment %}
-    <link rel="stylesheet" type="text/css" media="screen" href="http://127.0.0.1/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/main.css' %}" />
     {% block style %}{% endblock style %}
 </head>
@@ -41,10 +40,8 @@
     </div>
 
 
-    {% comment %} <script src="{% static 'js/jquery.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script> {% endcomment %}
-    <script src="http://127.0.0.1/assets/js/jquery.js"></script>
-    <script src="http://127.0.0.1/assets/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {% block script %}{% endblock script %}
 </body>
 </html>
