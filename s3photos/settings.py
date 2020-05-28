@@ -14,9 +14,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = s3util.secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -29,9 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # cloudinary
-    'cloudinary_storage',
-    'cloudinary',
+    # # cloudinary
+    # 'cloudinary_storage',
+    # 'cloudinary',
 
     # local
     'photos.apps.PhotosConfig',
@@ -52,7 +52,7 @@ ROOT_URLCONF = 's3photos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -66,12 +66,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 's3photos.wsgi.application'
-
-CLOUDINARY_STORAGE = {
-    'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, 'static')
-}
-
-CLOUDINARY_STORAGE = s3util.cloudinary_keys(CLOUDINARY_STORAGE)
+#
+# CLOUDINARY_STORAGE = {
+#     'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, 'static')
+# }
+#
+# CLOUDINARY_STORAGE = s3util.cloudinary_keys(CLOUDINARY_STORAGE)
 
 
 # Database
@@ -84,6 +84,7 @@ DATABASES = {
     }
 }
 
+# comment out when debug is true and vice versa
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "s3photos/static"),
 )
@@ -128,7 +129,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+# comment out when debug is True and vice versa
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+# using cloudinary as static and media storage
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'

@@ -8,7 +8,7 @@
 {% block content %}
     <div class="every">
 
-        {% for post in posts %}
+        {% for post in object_list %}
         <div class="post card post-{{post.pk}}">
             <img src="{{post.image_file.url}}" alt="" class="post-img">
             <div class="post-info">
@@ -17,7 +17,7 @@
                     <div class="uploader">
                         <span class="uploader-info">
                             <img class="user-vector vector" src="{% static 'svg/user.svg' %}" alt="user-vector">
-                            <a href="/" class="uploader-name">{{post.uploaded_by}}</a>
+                            <a href="?post-query={{post.uploaded_by}}" class="uploader-name">{{post.uploaded_by}}</a>
                         </span>
                     </div>
                     <div class="date">
