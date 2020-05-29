@@ -4,6 +4,7 @@ from django.core.validators import ValidationError
 
 from .models import Post
 
+
 class PostForm(forms.Form):
     file = forms.ImageField(help_text='Choose an image')
     caption = forms.CharField(max_length=200, widget=forms.Textarea, help_text='Tell others what the image is about')
