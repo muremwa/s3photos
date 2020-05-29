@@ -1,0 +1,4 @@
+cloudinary==1.15.0
+Django==2.1.5
+django-cloudinary-storage==0.2.3
+Pillow==5.3.0
