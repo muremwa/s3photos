@@ -1,8 +1,8 @@
-#S3PHOTOS
+# S3PHOTOS
 
-It's a site for posting images.
+It's a site for posting images.The site is served [here](https://s3photos.pythonanywhere.com).
 
-##Features
+## Features
 1. It previews the image before you post it.
 2. It stores the images on cloudinary.
 
