@@ -11,18 +11,17 @@ class AllPosts(ListView):
     template_name = 'photos/post_list.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        query = self.request.GET.get('post-query', None)
+        query = self.request.GET.get('post-query', '')
         context = super().get_context_data()
-        try:
-            liked = self.request.session['liked']
-        except KeyError:
-            self.request.session['liked'] = []
-            liked = self.request.session['liked']
-        context['liked'] = liked
-        if query:
+
+        if query and 'object_list' in context:
             context['object_list'] = context['object_list'].filter(uploaded_by__icontains=query)
 
-        context['post_query'] = query
+        context.update({
+            'liked': self.request.session.setdefault('liked', []),
+            'post_query': query
+        })
+
         return context
 
 
