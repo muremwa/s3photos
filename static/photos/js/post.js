@@ -11,7 +11,7 @@ $(document).on('click', '.liking', function () {
             csrfmiddlewaretoken: token,
         },
         success: function (response) {
-            if (response['state'] == 'liked') {
+            if (response['liked']) {
                 img.src = '/static/svg/heart_full.svg';
             } else {
                 img.src = '/static/svg/heart.svg';
