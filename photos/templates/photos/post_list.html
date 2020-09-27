@@ -8,38 +8,53 @@
 {% block content %}
     <div class="every">
 
-        {% for post in object_list %}
-        <div class="post card post-{{post.pk}}">
-            <img src="{{post.image_file.url}}" alt="" class="post-img">
-            <div class="post-info">
-                <!-- user and time info -->
-                <div class="info-post">
-                    <div class="uploader">
-                        <span class="uploader-info">
-                            <img class="user-vector vector" src="{% static 'svg/user.svg' %}" alt="user-vector">
-                            <a href="?post-query={{post.uploaded_by}}" class="uploader-name">{{post.uploaded_by}}</a>
-                        </span>
+        {% if object_list %}
+            {% for post in object_list %}
+            <div class="post card post-{{post.pk}}">
+                <img src="{{post.image_file.url}}" alt="" class="post-img">
+                <div class="post-info">
+                    <!-- user and time info -->
+                    <div class="info-post">
+                        <div class="uploader">
+                            <span class="uploader-info">
+                                <img class="user-vector vector" src="{% static 'svg/user.svg' %}" alt="user-vector">
+                                <a href="?post-query={{post.uploaded_by}}" class="uploader-name">{{post.uploaded_by}}</a>
+                            </span>
+                        </div>
+                        <div class="date">
+                            <img src="{% static 'svg/clock.svg' %}" alt="clock-vector" class="clock-vector vector">
+                            <span class="posted-time">{{ post.time }}</span>
+                        </div>
                     </div>
-                    <div class="date">
-                        <img src="{% static 'svg/clock.svg' %}" alt="clock-vector" class="clock-vector vector">
-                        <span class="posted-time">{{ post.time }}</span>
+
+                    <!-- Caption -->
+                    <div class="caption">
+                        <p>{{ post.caption }}</p>
                     </div>
-                </div>
 
-                <!-- Caption -->
-                <div class="caption">
-                    <p>{{ post.caption }}</p>
-                </div>
-
-                <!-- like button -->
-                <div class="like">
-                    {% csrf_token %}
-                    <img src="{% if post.pk in liked %}{% static 'svg/heart_full.svg' %}{% else %}{% static 'svg/heart.svg' %}{% endif %}" alt="like vector" class="vector liking" data-like-url="{{post.liking_url}}">
-                    <span class="h-m-l" name='count'>{{post.likes}}</span>
+                    <!-- like button -->
+                    <div class="like">
+                        {% csrf_token %}
+                        <img src="{% if post.pk in liked %}{% static 'svg/heart_full.svg' %}{% else %}{% static 'svg/heart.svg' %}{% endif %}" alt="like vector" class="vector liking" data-like-url="{{post.liking_url}}">
+                        <span class="h-m-l" name='count'>{{post.likes}}</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <div class="container" id="no-posts">
+                <div class="text-center">
+                    <h2>
+                        No posts availble at this moment
+                        {% if post_query %}
+                            for '{{ post_query }}'
+                        {% endif %}
+
+                    </h2>
+                    <a href="{% url 'photos:upload' %}" class="btn btn-dark upload-btn">Upload to <span class="s3">S3photos</span></a>
+                </div>
+            </div>
+        {% endif %}
 
 
     </div>

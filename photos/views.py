@@ -21,6 +21,8 @@ class AllPosts(ListView):
         context['liked'] = liked
         if query:
             context['object_list'] = context['object_list'].filter(uploaded_by__icontains=query)
+
+        context['post_query'] = query
         return context
 
 
