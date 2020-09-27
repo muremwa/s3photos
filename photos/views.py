@@ -38,24 +38,27 @@ class UploadImage(FormView):
 
 
 def like_or_unlike(request, post_pk):
-    liked = list(request.session['liked'])
+    liked_posts = list(request.session.setdefault('liked', []))
 
     if request.method == "POST":
-        response = {}
         post = get_object_or_404(Post, pk=post_pk)
+        liked = False
 
-        if post_pk in liked:
+        if post_pk in liked_posts:
             post.likes -= 1
-            liked.remove(post_pk)
-            response['state'] = 'unliked'
+            liked_posts.remove(post_pk)
         else:
             post.likes += 1
-            liked.append(post_pk)
-            response['state'] = 'liked'
+            liked_posts.append(post_pk)
+            liked = True
+
         post.save()
-        response['likes'] = post.likes
-        request.session['liked'] = liked
-        return JsonResponse(response)
+        request.session['liked'] = liked_posts
+
+        return JsonResponse({
+            'liked': liked,
+            'likes': post.likes
+        })
 
     else:
         raise Http404
