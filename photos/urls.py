@@ -13,4 +13,10 @@ urlpatterns = [
 
     # /photos/upload/
     path('upload/', views.UploadImage.as_view(), name='upload'),
+
+    # photos/api/index/
+    path('api/index/', views.all_posts_api, name='api_index'),
+
+    # photos/api/upload/
+    path('api/upload/', views.upload_image_api, name='api_upload'),
 ]

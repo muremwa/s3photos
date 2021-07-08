@@ -30,3 +30,4 @@ class PostForm(forms.Form):
             caption=data['caption']
         )
         new_post.save()
+        return new_post

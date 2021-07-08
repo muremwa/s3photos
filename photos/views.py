@@ -1,9 +1,11 @@
 from django.views.generic import ListView, FormView
 from django.http import JsonResponse, Http404
 from django.shortcuts import get_object_or_404, reverse
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Post
 from .forms import PostForm
+from .serializers import PostSerializer
 
 
 class AllPosts(ListView):
@@ -62,3 +64,47 @@ def like_or_unlike(request, post_pk):
 
     else:
         raise Http404
+
+
+def all_posts_api(request):
+    posts = Post.objects.all()
+
+    query = request.GET.get('post-query', None)
+
+    if query:
+        posts = posts.filter(uploaded_by__icontains=query)
+
+    return JsonResponse(
+        data={
+            'posts': PostSerializer(posts, many=True).data,
+            'liked': request.session.setdefault('liked', [])
+        },
+        safe=False
+    )
+
+
+def upload_image_api(request):
+    if request.method == 'GET':
+        form = PostForm()
+        fields = {field: form.fields[field].help_text for field in form.fields}
+        return JsonResponse({
+            'fields': fields
+        })
+
+    elif request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            post = form.save()
+            response = {
+                'success': True,
+                'post': PostSerializer(post).data
+            }
+
+        else:
+            response = {
+                'success': False,
+                'errors': form.errors
+            }
+
+        return JsonResponse(response)
