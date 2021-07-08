@@ -16,6 +16,9 @@ class Post(models.Model):
     def __str__(self):
         return "Post by {}".format(self.uploaded_by)
 
+    def get_clean_time(self):
+        return self.time.strftime("%B %d, %Y, %I:%M %p")
+
     def liking_url(self):
         return reverse('photos:liker', args=[str(self.pk)])
 
