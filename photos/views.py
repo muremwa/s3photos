@@ -1,7 +1,6 @@
 from django.views.generic import ListView, FormView
 from django.http import JsonResponse, Http404
 from django.shortcuts import get_object_or_404, reverse
-from django.views.decorators.csrf import csrf_exempt
 
 from .models import Post
 from .forms import PostForm
