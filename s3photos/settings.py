@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = s3util.secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 
 ALLOWED_HOSTS = ["*"]
 
@@ -52,7 +52,7 @@ ROOT_URLCONF = 's3photos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,11 +84,11 @@ DATABASES = {
     }
 }
 
-# comment out when debug is true and vice versa
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "s3photos/static"),
-)
 
+# comment out when debug is true and vice versa
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, "s3photos/static"),
+# )
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -132,7 +132,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # comment out when debug is True and vice versa
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 's3photos/static')
 
 
 # using cloudinary as static and media storage
