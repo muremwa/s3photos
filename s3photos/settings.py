@@ -1,6 +1,6 @@
 import os
 # this utility is ignored in the public repo
-from  .utilities import s3util
+from .utilities import s3util
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -138,3 +138,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 's3photos/static')
 # using cloudinary as static and media storage
 # DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

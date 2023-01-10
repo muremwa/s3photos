@@ -20,7 +20,34 @@ pip install requirements.txt
  
 3 Add a utility to add your own `SECRET_KEY` and  cloudinary keys or   
 opt to just use local storage.  
-> This repos includes a utility that is ignores called `s3util.py` that supplies cloudinary keys and the `SECRET_KEY`.
+> This repo includes a utility that is ignored called `s3util.py` that supplies cloudinary keys and the `SECRET_KEY`.  
+
+`s3photos/utilities/s3util.py`
+```python
+import json
+import pathlib
+import os
+
+
+home = str(pathlib.Path(__file__).parent)
+
+
+def secret_key() -> str:
+    """return the secret key"""
+    with open(os.path.join(home, 'secret_key.txt'), 'r') as f:
+        key = f.read().strip()
+    return key
+
+
+def cloudinary_keys(pre_key: dict) -> dict:
+    """return a dict with cloud keys"""
+    with open(os.path.join(home, 'keys.json'), 'r') as f:
+        keys = json.load(f)
+    pre_key.update(keys)
+
+    return pre_key
+
+```
 
 4 Run migrations
 ```commandline
