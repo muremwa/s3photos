@@ -94,6 +94,7 @@ def upload_image_api(request):
 
     elif request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
+        status_code = 201
 
         if form.is_valid():
             post = form.save()
@@ -103,9 +104,10 @@ def upload_image_api(request):
             }
 
         else:
+            status_code = 400
             response = {
                 'success': False,
                 'errors': form.errors
             }
 
-        return JsonResponse(response)
+        return JsonResponse(response, status=status_code)
