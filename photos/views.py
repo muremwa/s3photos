@@ -1,6 +1,7 @@
 from django.views.generic import ListView, FormView
 from django.http import JsonResponse, Http404
 from django.shortcuts import get_object_or_404, reverse
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from .models import Post
 from .forms import PostForm
@@ -65,6 +66,7 @@ def like_or_unlike(request, post_pk):
         raise Http404
 
 
+@ensure_csrf_cookie
 def all_posts_api(request):
     posts = Post.objects.all()
 
