@@ -4,6 +4,7 @@ $(document).on('change', '#id_file', function (e) {
 
     reader.onload = function (e) {
         $("#image-to-call").attr('src', e.target.result);
+        $("#image-to-call").trigger('scrollIntoView', { block: "center", behavior: "smooth" });
     }
     reader.readAsDataURL(this.files[0])
     document.querySelector('.File-alert').style.display = 'none';

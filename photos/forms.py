@@ -6,9 +6,17 @@ from .models import Post
 
 
 class PostForm(forms.Form):
-    file = forms.ImageField(help_text='Choose an image')
-    caption = forms.CharField(max_length=200, widget=forms.Textarea, help_text='Tell others what the image is about')
-    your_name = forms.CharField(max_length=400, help_text='Enter a name you would like to be known as')
+    file = forms.ImageField(help_text='Choose an image', widget=forms.FileInput(attrs={'class': 'form-control'}))
+    caption = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control'}),
+        max_length=200,
+        help_text='Tell others what the image is about'
+    )
+    your_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=400,
+        help_text='Enter a name you would like to be known as'
+    )
 
     def clean_your_name(self):
         data = self.cleaned_data['your_name']
