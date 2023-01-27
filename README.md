@@ -5,8 +5,8 @@ It's a site for posting images.The site is served [here](https://s3photos.python
 ## Features
 1. It previews the image before you post it.
 2. It stores the images on cloudinary*.
-3. Has a [React](https://reactjs.org/)-based front end on the url `/open/`.
-4. Has an [Angular](https://angular.io/)-based front end on the url `/ng/`.
+3. Has a [React](https://reactjs.org/)-based front end on the url [`/open/`](https://s3photos.pythonanywhere.com/open/).
+4. Has an [Angular](https://angular.io/)-based front end on the url [`/ng/`](https://s3photos.pythonanywhere.com/ng/).
 
 ## Using s3photos locally.
 1 Clone this repo.
