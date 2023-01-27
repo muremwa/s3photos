@@ -1,5 +1,5 @@
 from django.views.generic import ListView, FormView
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, reverse
 from django.views.decorators.csrf import ensure_csrf_cookie
 
@@ -111,3 +111,6 @@ def upload_image_api(request):
             }
 
         return JsonResponse(response, status=status_code)
+
+    return HttpResponse(":-(", status=405)
+
